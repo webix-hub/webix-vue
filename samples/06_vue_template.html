@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+
+	<script type="text/javascript" src="//cdn.webix.com/site/webix.js"></script>
+	<link rel="stylesheet" type="text/css" href="//cdn.webix.com/site/webix.css">
+
+	<script type="text/javascript" src="../sources/vue-view.js"></script>
+	<title>Vue + Webix : View "vue"</title>
+</head>
+<body>
+
+<script>
+var toolbar = {
+	view:"toolbar",
+	elements:[
+		{ view:"button", label:"Info", click:() => webix.message("Select something in the list") },
+		{}
+	]
+};
+
+var list = {
+	view:"list", id:"list", select:true,
+	template:"#value# (#size#)",
+	data:[
+		{ id:1, value:"Record 1", size:92 },
+		{ id:3, value:"Record 2", size:120 },
+		{ id:2, value:"Record 3", size:15 }
+	]
+};
+
+var preview = {
+	view:"vue", id:"preview",
+	template:`
+		<div>
+			<p>This part is rendered by VueJS, data from the list</p>
+			<div v-if='value'>
+				<p>Selected: {{value}}</p>
+				<p>Size: <input v-model='size'></p>
+			</div>
+		</div>
+	`,
+	data:{
+		value:"",
+		size:""
+	},
+	watch:{
+		size:function(value){
+			$$("list").updateItem($$("list").getSelectedId(), { size: value });
+		}
+	}
+};
+
+var stats = {
+	view:"vue",
+	template:`
+		<div>
+			<p>This part is rendered by VueJS, static data</p>
+			<p>Average Weight: {{weight}}lbs</p>
+		</div>
+	`,
+	data:{
+		weight: 244
+	}
+};
+
+webix.ui({
+	rows:[
+		toolbar,
+		{ cols:[
+			list,
+			{ rows:[ preview, stats ]}
+		]}
+	]
+});
+
+$$("preview").bind("list");
+
+</script>
+</body>
+</html>

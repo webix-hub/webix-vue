@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+
+	<script type="text/javascript" src="//cdn.webix.com/edge/webix.js"></script>
+	<link rel="stylesheet" type="text/css" href="//cdn.webix.com/edge/webix.css">
+
+	<script type="text/javascript" src="../sources/webix-ui.js"></script>
+	<title>Charts - Vue + Webix</title>
+</head>
+<body>
+
+<div id="demo1"></div>
+<div id="demo2"></div>
+<div id="demo3"></div>
+
+<script>
+	var data = [{ id:1, value:"First", name:"Alex", last:"Russel" },
+				{ id:2, value:"Second", name:"Denis", last:"Brown", address:"Holms str. 18" },
+				{ id:3, value:"Third"  }];
+
+	new Vue({
+		el: "#demo1",
+		template:`
+			<div style="width:400px; height: 350px;">
+				<h3>1. Building UI</h3>
+				<webix-ui :config='ui'/>
+			</div>
+		`,
+		data:{
+			ui:{
+				cols:[{
+					view:"calendar",
+				}, {
+					view:"list", select:true,
+					data: data
+				}]
+			}
+		}
+	});
+
+	new Vue({
+		el: "#demo2",
+		template:`
+			<div style="width:400px; height: 250px;">
+				<h3>2. One way data binding,
+					<button v-on:click="data=[]">Clean</button>
+				</h3>
+				<webix-ui :config='ui' v-model='data'/>
+			</div>
+		`,
+		data:{
+			data:data,
+			ui:{
+				view:"datatable", autoheight:true, select:"row",
+				columns:[
+					{ id:"value", header:"Section Index" },
+					{ id:"name", header:"First Name" },
+					{ id:"last", header:"Last Name" },
+					{ id:"address", header:"Address", fillspace:1 }
+				]
+			}
+		}
+	});
+
+	new Vue({
+		el: "#demo3",
+		template:`
+			<div style="width:400px; height: 250px;">
+				<h3>3. Two-way data binding, try to change <input v-model.number='result'></h3>
+				<webix-ui :config='ui' v-model.number='result'/>
+			</div>
+		`,
+		data:{
+			result:50,
+			ui:{
+				margin:20, rows:[{
+					view:"template", type:"header", template:"Webix UI" 
+				},{
+					view:"slider", label:"Change me", labelWidth:120, inputWidth: 300, value:50,
+					on:{
+						onChange:function(){
+							this.$scope.$emit("input", this.getValue());
+						},
+						onValue:function(value){
+							this.setValue(value);
+						}
+					}
+				}]
+			}
+		}
+	});
+</script>
+</body>
+</html>

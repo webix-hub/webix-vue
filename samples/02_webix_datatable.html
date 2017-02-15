@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+
+	<script type="text/javascript" src="//cdn.webix.com/site/webix.js"></script>
+	<link rel="stylesheet" type="text/css" href="//cdn.webix.com/site/webix.css">
+
+	<script type="text/javascript" src="../sources/webix-ui.js"></script>
+	<title>Vue + Webix: DataTable</title>
+</head>
+<body>
+<style>
+	.etable td, .etable th{ padding:10px; border-right: 1px solid silver; border-top: 1px solid silver; }
+</style>
+<div id="demo1"></div>
+
+<script>
+	new Vue({
+		el: "#demo1",
+		template:`
+			<div>
+				<h1>Vue + Webix: DataTable</h1>
+				<p>Webix Datatable</p>
+
+				<webix-ui :config='table' v-model='gridData' />
+
+				<p>vs classic table</p>
+
+				<table class='etable'>
+				<tr>
+				<th>Value</th><th>Name</th><th>Last</th><th>Address</th>
+			    <tr v-for="row in gridData">
+			    	<td>{{row.value}}</td><td>{{row.name}}</td><td>{{row.last}}</td><td>{{row.address}}</td>
+			    </tr>
+  				</table>
+			</div>
+		`,
+		data:{
+			gridData:[
+				{ id:1, value:"First", name:"Alex", last:"Russel" },
+				{ id:2, value:"Second", name:"Denis", last:"Brown", address:"Holms str. 18" },
+				{ id:3, value:"Third"  }
+			],
+			table:{ 
+				view:"datatable", autoheight:true, editable:true, editaction:"click", columns:[
+					{ id:"value", 	editor:"text", header:"Section Index" },
+					{ id:"name", 	editor:"text", header:"First Name" },
+					{ id:"last", 	editor:"text", header:"Last Name" },
+					{ id:"address", 	editor:"text", header:"Address", fillspace:1 }
+				], on:{
+					onAfterEditStop:function(){
+						this.$scope.$emit("input", this.serialize() );
+					}
+				}
+			}
+		}
+	});
+</script>
+</body>
+</html>

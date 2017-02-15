@@ -1,0 +1,27 @@
+{
+  "name": "vue-webix",
+  "version": "1.0.0",
+  "description": "VueJS adapter for Webix UI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webix-hub/vue-webix.git"
+  },
+  "keywords": [
+    "vue",
+    "webix",
+    "grid",
+    "tree",
+    "chart",
+    "widgets"
+  ],
+  "author": "Maksim Kozhukh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/webix-hub/vue-webix/issues"
+  },
+  "homepage": "https://github.com/webix-hub/vue-webix#readme"
+}
