@@ -22,7 +22,7 @@ var data = [
 var toolbar = {
 	view:"toolbar",
 	elements:[
-		{ view:"button", type:"iconButton", icon:"lightbulb-o", label:"Hint", click:() => webix.message("Select something in the list"), autowidth:true },
+		{ view:"button", type:"iconButton", icon:"lightbulb-o", label:"Hint", click:function(){webix.message("Select something in the list")}, autowidth:true },
 		{}
 	]
 };
