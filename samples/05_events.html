@@ -21,15 +21,15 @@
 			<div>
 				<h3>Vue + Webix: triggering events</h3>
 				<webix-ui :config='toolbar' v-on:toolbar="name = $event.config.label" />
-				Last clicked: {{name}}
+				<h4>Last clicked: {{name}}</h4>
 			</div>`,
 		data:{
 			name:"",
 			toolbar:{
 				view:"toolbar",
 				elements:[
-					{ view:"button", name:'add', label:"Add", width:100 },
-					{ view:"button", name:'rem', label:"Remove", width:100 },
+					{ view:"button", name:'add', label:"Add", width:150 },
+					{ view:"button", name:'rem', label:"Remove", width:150 },
 					{ view:"label",  label:"Webix UI", align:"right"}
 				], on:{
 					onItemClick:function(id){ 
