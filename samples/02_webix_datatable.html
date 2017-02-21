@@ -5,6 +5,7 @@
 
 	<script type="text/javascript" src="//cdn.webix.com/site/webix.js"></script>
 	<link rel="stylesheet" type="text/css" href="//cdn.webix.com/site/webix.css">
+	<link rel="stylesheet" type="text/css" href="./samples.css">
 
 	<script type="text/javascript" src="../sources/webix-ui.js"></script>
 	<title>Vue + Webix: DataTable</title>
@@ -20,12 +21,13 @@
 		el: "#demo1",
 		template:`
 			<div>
-				<h1>Vue + Webix: DataTable</h1>
+				<h3>Vue + Webix: DataTable</h3>
 				<p>Webix Datatable</p>
 
 				<webix-ui :config='table' v-model='gridData' />
 
-				<p>vs classic table</p>
+				<br>
+				<p>classic table</p>
 
 				<table class='etable'>
 				<tr>

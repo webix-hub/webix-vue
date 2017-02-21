@@ -5,6 +5,7 @@
 
 	<script type="text/javascript" src="//cdn.webix.com/edge/webix.js"></script>
 	<link rel="stylesheet" type="text/css" href="//cdn.webix.com/edge/webix.css">
+	<link rel="stylesheet" type="text/css" href="./samples.css">
 
 	<script type="text/javascript" src="../sources/webix-ui.js"></script>
 	<title>Charts - Vue + Webix</title>
@@ -69,7 +70,7 @@
 		el: "#demo3",
 		template:`
 			<div style="width:400px; height: 250px;">
-				<h3>3. Two-way data binding. Try to change <input v-model.number='result' style='width:55px; float:right'></h3>				
+				<h3>3. Two-way data binding.</h3> Try to change <input v-model.number='result' style='width:55px; float:right'>				
 				<webix-ui :config='ui' v-model.number='result'/>
 			</div>
 		`,

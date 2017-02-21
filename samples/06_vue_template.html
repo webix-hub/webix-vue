@@ -5,6 +5,7 @@
 
 	<script type="text/javascript" src="//cdn.webix.com/site/webix.js"></script>
 	<link rel="stylesheet" type="text/css" href="//cdn.webix.com/site/webix.css">
+	<link rel="stylesheet" type="text/css" href="./samples.css">
 
 	<script type="text/javascript" src="../sources/vue-view.js"></script>
 	<title>Vue + Webix : View "vue"</title>
@@ -28,7 +29,8 @@ var toolbar = {
 };
 
 var list = {
-	view:"list", id:"list", select:true, gravity:0.5,
+	view:"list", id:"list", select:true,
+	width:250, scroll:false,
 	template:"#name# #last# (#address#)",
 	data:data
 };
