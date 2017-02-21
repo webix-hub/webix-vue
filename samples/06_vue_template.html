@@ -12,22 +12,25 @@
 <body>
 
 <script>
+
+var data = [
+	{ id:1, value:"First", name:"Alex", last:"Russel", address:"Holmes st. 18", },
+	{ id:2, value:"Second", name:"Denis", last:"Brown", address:"Greenleaf st. 7" },
+	{ id:3, value:"Third", name:"James", last:"Sullivan", address:"Boswell st. 34" },
+];
+
 var toolbar = {
 	view:"toolbar",
 	elements:[
-		{ view:"button", label:"Info", click:() => webix.message("Select something in the list") },
+		{ view:"button", type:"iconButton", icon:"lightbulb-o", label:"Hint", click:function(){webix.message("Select something in the list")}, autowidth:true },
 		{}
 	]
 };
 
 var list = {
-	view:"list", id:"list", select:true,
-	template:"#value# (#size#)",
-	data:[
-		{ id:1, value:"Record 1", size:92 },
-		{ id:3, value:"Record 2", size:120 },
-		{ id:2, value:"Record 3", size:15 }
-	]
+	view:"list", id:"list", select:true, gravity:0.5,
+	template:"#name# #last# (#address#)",
+	data:data
 };
 
 var preview = {
@@ -35,19 +38,19 @@ var preview = {
 	template:`
 		<div>
 			<p>This part is rendered by VueJS, data from the list</p>
-			<div v-if='value'>
-				<p>Selected: {{value}}</p>
-				<p>Size: <input v-model='size'></p>
+			<div v-if='last'>
+				<p>Selected: {{last}}</p>
+				<p>Address: <input v-model='address'></p>
 			</div>
 		</div>
 	`,
 	data:{
-		value:"",
-		size:""
+		last:"",
+		address:""
 	},
 	watch:{
-		size:function(value){
-			$$("list").updateItem($$("list").getSelectedId(), { size: value });
+		address:function(value){
+			$$("list").updateItem($$("list").getSelectedId(), { address: value });
 		}
 	}
 };
