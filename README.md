@@ -1,6 +1,8 @@
 VueJS adapter for Webix UI
 ==========================
 
+[![npm version](https://badge.fury.io/js/vue-webix.svg)](https://badge.fury.io/js/vue-webix)
+
 If you need a framework for using Webix UI, check [Webix Jet](https://webix.gitbooks.io/webix-jet/content/chapter1.html) first
 
 ### When to use
