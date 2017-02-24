@@ -7,7 +7,7 @@ See the [detailed documentation on integration of VueJS with Webix](http://docs.
 
 If you need a framework for using Webix UI, we highly recommend you to use the [Webix Jet](https://webix.gitbooks.io/webix-jet/content/chapter1.html) framework for building web apps with Webix, as it is native for the library and will help you to manage the development stages in the most natural way.
 
-## When to Use
+## When to Use Vue+Webix integration
 
 - add a few complex widgets to a VueJS-based apps (such as datatable, spreadsheet, etc.)
 - use a VueJS app inside of Webix UI (reactive templates, custom forms, etc.) 
