@@ -9,8 +9,10 @@ If you need a framework for using Webix UI, we highly recommend you to use the [
 
 ## When to Use Vue+Webix integration
 
-- add a few complex widgets to a VueJS-based apps (such as datatable, spreadsheet, etc.)
-- use a VueJS app inside of Webix UI (reactive templates, custom forms, etc.) 
+- to add a few complex widgets to a VueJS-based apps (such as datatable, spreadsheet, etc.)
+- to use a VueJS app inside of Webix UI (reactive templates, custom forms, etc.) 
+
+You can also create a custom component by wrapping a Webix widget into a Vue component or use one of ready-made Vue+Webix Form controls.
 
 ## webix-ui component in a Vue app
 
