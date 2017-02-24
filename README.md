@@ -3,7 +3,7 @@ VueJS adapter for Webix UI
 
 [![npm version](https://badge.fury.io/js/vue-webix.svg)](https://badge.fury.io/js/vue-webix)
 
-See the [detailed documentation on integration of VueJS with Webix](http://docs.webix.com/desktop__vue.html). 
+See the [detailed documentation on integration of Webix with VueJS](http://docs.webix.com/desktop__vue.html). 
 
 If you need a framework for using Webix UI, we highly recommend you to use the [Webix Jet](https://webix.gitbooks.io/webix-jet/content/chapter1.html) framework for building web apps with Webix, as it is native for the library and will help you to manage the development stages in the most natural way.
 
