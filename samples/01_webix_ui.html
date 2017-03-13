@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="./samples.css">
 
 	<script type="text/javascript" src="../sources/webix-ui.js"></script>
-	<title>Charts - Vue + Webix</title>
+	<title>Vue + Webix: Using Webix component inside of Vue app</title>
 </head>
 <body>
 
@@ -50,7 +50,7 @@
 				<h3>2. One way data binding
 					<button v-on:click="data=[]" style='float:right'>Clear</button>
 				</h3>
-				<webix-ui :config='ui' v-model='data'/>
+				<webix-ui :config='ui' v-bind:value='data'/>
 			</div>
 		`,
 		data:{
