@@ -43,9 +43,13 @@ var preview = {
 			<div v-if='last'>
 				<p>Selected: {{last}}</p>
 				<p>Address: <input v-model='address'></p>
+				<button v-on:click="myclick">Info</button>
 			</div>
 		</div>
 	`,
+	methods: {
+		myclick: function() { webix.message("Info button clicked!"); }
+	},
 	data:{
 		last:"",
 		address:""

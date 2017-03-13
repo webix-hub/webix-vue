@@ -13,6 +13,7 @@ webix.protoUI({
 				el: "#"+id,
 				template: vtm,
 				data: this.$vueData,
+				methods: this.config.methods || {},
 				watch: this.config.watch
 			})
 		});
