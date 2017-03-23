@@ -1,5 +1,5 @@
 {
-  "name": "vue-webix",
+  "name": "webix-vue",
   "version": "1.1.0",
   "description": "VueJS adapter for Webix UI",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/webix-hub/vue-webix.git"
+    "url": "git+https://github.com/webix-hub/webix-vue.git"
   },
   "keywords": [
     "vue",
@@ -21,7 +21,7 @@
   "author": "Maksim Kozhukh",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/webix-hub/vue-webix/issues"
+    "url": "https://github.com/webix-hub/webix-vue/issues"
   },
-  "homepage": "https://github.com/webix-hub/vue-webix#readme"
+  "homepage": "https://github.com/webix-hub/webix-vue#readme"
 }
