@@ -1,5 +1,5 @@
 {
-  "name": "webix-vue",
+  "name": "vue-webix",
   "version": "1.2.0",
   "description": "VueJS adapter for Webix UI",
   "main": "index.js",
