@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+
+	<script type="text/javascript" src="//cdn.webix.com/site/webix.js"></script>
+	<link rel="stylesheet" type="text/css" href="//cdn.webix.com/site/webix.css">
+	<link rel="stylesheet" type="text/css" href="./samples.css">
+
+	<script type="text/javascript" src="../sources/webix-ui.js"></script>
+	<title>Vue + Webix: Tree &amp; TreeTable</title>
+</head>
+<body>
+<style>
+	.etable td, .etable th{ padding:10px; border-right: 1px solid silver; border-top: 1px solid silver; }
+</style>
+<div id="demo1"></div>
+
+<script>
+	new Vue({
+		el: "#demo1",
+		template:`
+			<div>
+				<h3>Vue + Webix: DataTable</h3>
+				<p>Webix Tree</p>
+				<webix-ui :config='tree' v-model='treeData' copy-data='true'/>
+
+				<br><p>Webix TreeTable</p>
+				<webix-ui :config='treeTable' v-model='treeData' copy-data='true' />
+
+				<br>
+				<p>classic table</p>
+
+				<table class='etable'>
+				<tr>
+				<th>Value</th><th>Name</th><th>Last</th><th>Address</th>
+			    <tr v-for="row in treeData">
+			    	<td>{{row.value}}</td><td>
+					{{row.name}}
+					<table class='etable'>
+					<tr v-for="sub in row.data">
+						<td>{{sub.name}}</td>
+					</tr>
+					</table>
+			    	</td><td>{{row.last}}</td><td>{{row.address}}</td>
+
+			    </tr>
+  				</table>
+			</div>
+		`,
+		data:{
+			treeData:[	
+				{ id:1, value:"First", name:"Alex", last:"Russel", address:"Holmes st. 18", data:[
+					{ id:"1.1", name:"Package A12" },
+					{ id:"1.2", name:"Package A12" },
+					{ id:"1.3", name:"Package A13" }
+				]},
+				{ id:2, value:"Second", name:"Denis", last:"Brown", address:"Greenleaf st. 7", data:[
+					{ id:"2.1", name:"Package B12" },
+					{ id:"2.2", name:"Package B12" },
+					{ id:"2.3", name:"Package B13" }
+				]},
+				{ id:3, value:"Third", name:"James", last:"Sullivan", address:"Boswell st. 34" }	
+			],
+			tree:{ 
+				view:"tree", template:"{common.icon()}{common.folder()} #name#", height: 200, select:true
+			},
+			treeTable:{ 
+				view:"treetable", autoheight:true, autowidth:true, editable:true, editaction:"click", columns:[
+					{ id:"value",	editor:"select", sort:"string",	header:"Section" },
+					{ id:"name", 	editor:"text",	sort:"string",	header:"Name", width:300,
+						template:"{common.icon()}{common.folder()} #name#"}
+					], on:{
+					onAfterEditStop:function(){
+						this.$scope.$emit("input", this.serialize() );
+					}
+				}
+			}
+		}
+	});
+</script>
+</body>
+</html>

@@ -2,6 +2,9 @@ function data_handler(value){
   var view = $$(this.webixId);
 
   if (typeof value === "object"){
+    if (this.copyData)
+      value = webix.copy(value);
+
     if (view.setValues)
       view.setValues(value);
     else if (view.parse){
@@ -18,7 +21,7 @@ function data_handler(value){
 }
 
 Vue.component("webix-ui", {
-  props: ['config', 'value'],
+  props: ['config', 'value', 'copyData'],
   watch:{
     value:{
       handler:data_handler
