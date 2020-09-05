@@ -15,7 +15,7 @@ function data_handler(value){
     view.setValue(value);
 
   var subs = view.queryView(function(sub) {
-    return sub.hasEvent && sub.hasEvent("onAfterRender");
+    return sub.hasEvent && sub.hasEvent("onValue");
   }, "all");
 
   if (subs.length) {
