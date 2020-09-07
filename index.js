@@ -13,10 +13,15 @@ function data_handler(value){
   } else if (view.setValue)
     view.setValue(value);
 
-  webix.ui.each(view, function(sub){
-    if (sub.hasEvent && sub.hasEvent("onValue"))
+  var subs = view.queryView(function(sub) {
+    return sub.hasEvent && sub.hasEvent("onValue");
+  }, "all");
+
+  if (subs.length) {
+    subs.forEach(function(sub) {
       sub.callEvent("onValue", [value]);
-  }, this, true);
+    });
+  };
 }
 
 Vue.component("webix-ui", {
