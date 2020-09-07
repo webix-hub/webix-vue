@@ -19,10 +19,10 @@ function data_handler(value){
   }, "all");
 
   if (subs.length) {
-    for (var i = 0; i < subs.length; i++) {
-      subs[i].callEvent("onValue", [value]);
-    };
-  }
+    subs.forEach(function(sub) {
+      sub.callEvent("onValue", [value]);
+    });
+  };
 }
 
 Vue.component("webix-ui", {
