@@ -1,98 +1,121 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+  <head>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="text/javascript" src="//cdn.webix.com/edge/webix.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.webix.com/edge/webix.css" />
+    <link rel="stylesheet" type="text/css" href="./samples.css" />
 
-	<script type="text/javascript" src="//cdn.webix.com/edge/webix.js"></script>
-	<link rel="stylesheet" type="text/css" href="//cdn.webix.com/edge/webix.css">
-	<link rel="stylesheet" type="text/css" href="./samples.css">
+    <script type="text/javascript" src="../sources/webix-ui.js"></script>
+    <title>Vue + Webix: Using Webix components inside of a Vue app</title>
+  </head>
+  <body>
+    <div id="demos"></div>
 
-	<script type="text/javascript" src="../sources/webix-ui.js"></script>
-	<title>Vue + Webix: Using Webix component inside of Vue app</title>
-</head>
-<body>
+    <script>
+      const data = [
+        {
+          id: 1,
+          value: "First",
+          name: "Alex",
+          last: "Russel",
+          address: "Holmes st. 18",
+        },
+        {
+          id: 2,
+          value: "Second",
+          name: "Denis",
+          last: "Brown",
+          address: "Greenleaf st. 7",
+        },
+        {
+          id: 3,
+          value: "Third",
+          name: "James",
+          last: "Sullivan",
+          address: "Boswell st. 34",
+        },
+      ];
 
-<div id="demo1"></div>
-<div id="demo2"></div>
-<div id="demo3"></div>
+      const cfg = {
+        demo1: {
+          ui: {
+            cols: [
+              {
+                view: "calendar",
+              },
+              {
+                view: "list",
+                select: true,
+                data: data,
+              },
+            ],
+          },
+        },
+        demo2: {
+          data,
+          ui: {
+            view: "datatable",
+            autoheight: true,
+            select: "row",
+            columns: [
+              { id: "name", header: "First Name" },
+              { id: "last", header: "Last Name" },
+              { id: "address", header: "Address", fillspace: 1 },
+            ],
+          },
+        },
+        demo3: {
+          result: 50,
+          ui: {
+            margin: 20,
+            rows: [
+              {
+                view: "slider",
+                label: "Change me",
+                labelWidth: 100,
+                value: 50,
+                on: {
+                  onChange() {
+                    this.$scope.$emit("update:modelValue", this.getValue());
+                  },
+                  onValue(value) {
+                    this.setValue(value);
+                  },
+                },
+              },
+            ],
+          },
+        },
+      };
 
-<script>
-	var data = [
-		{ id:1, value:"First", name:"Alex", last:"Russel", address:"Holmes st. 18" },
-		{ id:2, value:"Second", name:"Denis", last:"Brown", address:"Greenleaf st. 7" },
-		{ id:3, value:"Third", name:"James", last:"Sullivan", address:"Boswell st. 34" },
-	];
+      const app = Vue.createApp({
+        template: `
+					<div style="width:400px; height: 800px;">
+						<div class="demo1">
+							<h3>1. Building UI</h3>
+							<webix-ui :config='demo1.ui'/>
+						</div>
+						<div class="demo2">
+							<h3>2. One way data binding
+							<button v-on:click="demo2.data=[]" style='float:right'>Clear</button>
+							</h3>
+							<webix-ui :config='demo2.ui' v-bind:modelValue='demo2.data'/>
+						</div>
+						<div class="demo3">
+							<h3>3. Two-way data binding.</h3> Try to change this value: <input v-model.number='demo3.result' style='width:55px; float:right'>				
+							<webix-ui :config='demo3.ui' v-model.number='demo3.result'/>
+						</div>
+					</div>
+				`,
+        data() {
+          return cfg;
+        },
+      });
 
-	new Vue({
-		el: "#demo1",
-		template:`
-			<div style="width:400px; height: 350px;">
-				<h3>1. Building UI</h3>
-				<webix-ui :config='ui'/>
-			</div>
-		`,
-		data:{
-			ui:{
-				cols:[{
-					view:"calendar",
-				},{
-					view:"list", select:true,
-					data: data
-				}]
-			}
-		}
-	});
+      registerWebixUIComponent(app);
 
-	new Vue({
-		el: "#demo2",
-		template:`
-			<div style="width:400px; height: 250px;">
-				<h3>2. One way data binding
-					<button v-on:click="data=[]" style='float:right'>Clear</button>
-				</h3>
-				<webix-ui :config='ui' v-bind:value='data'/>
-			</div>
-		`,
-		data:{
-			data:data,
-			ui:{
-				view:"datatable", autoheight:true, select:"row",
-				columns:[
-					{ id:"name", header:"First Name" },
-					{ id:"last", header:"Last Name" },
-					{ id:"address", header:"Address", fillspace:1 }
-				]
-			}
-		}
-	});
-
-	new Vue({
-		el: "#demo3",
-		template:`
-			<div style="width:400px; height: 250px;">
-				<h3>3. Two-way data binding.</h3> Try to change <input v-model.number='result' style='width:55px; float:right'>				
-				<webix-ui :config='ui' v-model.number='result'/>
-			</div>
-		`,
-		data:{
-			result:50,
-			ui:{
-				margin:20, rows:[{
-					view:"template", type:"header", template:"Webix UI" 
-				},{
-					view:"slider", label:"Change me", labelWidth:100, value:50,
-					on:{
-						onChange:function(){
-							this.$scope.$emit("input", this.getValue());
-						},
-						onValue:function(value){
-							this.setValue(value);
-						}
-					}
-				}]
-			}
-		}
-	});
-</script>
-</body>
+      app.mount("#demos");
+    </script>
+  </body>
 </html>

@@ -1,44 +1,45 @@
-function data_handler(value){
-  var view = $$(this.webixId);
+function data_handler(value) {
+  const view = $$(this.webixId);
 
-  if (typeof value === "object"){
-    if (this.copyData)
-      value = webix.copy(value);
+  if (typeof value === "object") {
+    if (this.copyData) value = webix.copy(value);
 
-    if (view.setValues)
-      view.setValues(value);
-    else if (view.parse){
+    if (view.setValues) view.setValues(value);
+    else if (view.parse) {
       view.clearAll();
-      view.parse(value)
+      view.parse(value);
     }
-  } else if (view.setValue)
-    view.setValue(value);
+  } else if (view.setValue) view.setValue(value);
 
-  webix.ui.each(view, function(sub){
-    if (sub.hasEvent && sub.hasEvent("onValue"))
+  const subs = view.queryView(sub => {
+    return sub.hasEvent && sub.hasEvent("onValue");
+  }, "all");
+
+  if (subs.length) {
+    subs.forEach(sub => {
       sub.callEvent("onValue", [value]);
-  }, this, true);
+    });
+  }
 }
 
-Vue.component("webix-ui", {
-  props: ['config', 'value', 'copyData'],
-  watch:{
-    value:{
-      handler:data_handler
-    }
-  },
+function registerWebixUIComponent(app) {
+  app.component("webix-ui", {
+    props: ["config", "modelValue", "copyData"],
+    watch: {
+      modelValue: {
+        handler: data_handler,
+      },
+    },
+    template: "<div></div>",
+    mounted() {
+      const config = webix.copy(this.config);
+      config.$scope = this;
 
-  template:"<div></div>",
-    
-  mounted:function(){
-    var config = webix.copy(this.config);
-    config.$scope = this;
-
-    this.webixId = webix.ui(config, this.$el);
-    if (this.value)
-      data_handler.call(this, this.value);
-  },
-  destroyed:function(){
-    webix.$$(this.webixId).destructor();
-  }
-});
+      this.webixId = webix.ui(config, this.$el);
+      if (this.modelValue) data_handler.call(this, this.modelValue);
+    },
+    destroyed() {
+      webix.$$(this.webixId).destructor();
+    },
+  });
+}
