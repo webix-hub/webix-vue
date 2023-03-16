@@ -1,45 +1,50 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+  <head>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="text/javascript" src="//cdn.webix.com/site/webix.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.webix.com/site/webix.css" />
+    <link rel="stylesheet" type="text/css" href="./samples.css" />
 
-	<script type="text/javascript" src="//cdn.webix.com/edge/webix_debug.js"></script>
-	<link rel="stylesheet" type="text/css" href="//cdn.webix.com/edge/webix.css">
-	<link rel="stylesheet" type="text/css" href="./samples.css">
+    <script type="text/javascript" src="../sources/webix-ui.js"></script>
+    <title>Vue + Webix: Triggering events</title>
+  </head>
+  <body>
+    <div id="demo1"></div>
 
-	<script type="text/javascript" src="../sources/webix-ui.js"></script>
-	<script type="text/javascript" src="../sources/controls.js"></script>
-	<title>Vue + Webix: triggering events</title>
-</head>
-<body>
+    <script>
+      const app = Vue.createApp({
+        template: `
+					<div>
+						<h3>Vue + Webix: triggering events</h3>
+						<webix-ui :config='toolbar' v-on:toolbar="name = $event.config.label" />
+						<h4>Last clicked: {{name}}</h4>
+					</div>
+				`,
+        data() {
+          return {
+            name: "",
+            toolbar: {
+              view: "toolbar",
+              width: 600,
+              elements: [
+                { view: "button", name: "add", label: "Add", width: 150 },
+                { view: "button", name: "rem", label: "Remove", width: 150 },
+                { view: "label", label: "Webix UI", align: "right" },
+              ],
+              on: {
+                onItemClick() {
+                  this.$scope.$emit("toolbar", this.$eventSource);
+                },
+              },
+            },
+          };
+        },
+      });
 
-<div id="demo1"></div>
+      registerWebixUIComponent(app);
 
-<script>
-	new Vue({
-		el: "#demo1",
-		template:`
-			<div>
-				<h3>Vue + Webix: triggering events</h3>
-				<webix-ui :config='toolbar' v-on:toolbar="name = $event.config.label" />
-				<h4>Last clicked: {{name}}</h4>
-			</div>`,
-		data:{
-			name:"",
-			toolbar:{
-				view:"toolbar", width:600,
-				elements:[
-					{ view:"button", name:'add', label:"Add", width:150 },
-					{ view:"button", name:'rem', label:"Remove", width:150 },
-					{ view:"label",  label:"Webix UI", align:"right"}
-				], on:{
-					onItemClick:function(id){ 
-						this.$scope.$emit("toolbar", this.$eventSource);
-					}
-				}
-			}
-		}
-	});
-</script>
-</body>
+      app.mount("#demo1");
+    </script>
+  </body>
 </html>
