@@ -1,4 +1,4 @@
-import Vue from "vue";
+import { createApp } from "vue";
 
 function data_handler(value) {
   const view = $$(this.webixId);
@@ -135,7 +135,7 @@ webix.protoUI(
       config.template = "<div id='" + id + "'></div>";
 
       this.attachEvent("onAfterRender", function() {
-        this.$vue = Vue.createApp({
+        this.$vue = createApp({
           template: vtm,
           methods: this.config.methods || {},
           watch: this.config.watch,
