@@ -1,6 +1,6 @@
 {
   "name": "vue-webix",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "VueJS adapter for Webix UI",
   "main": "index.js",
   "scripts": {
