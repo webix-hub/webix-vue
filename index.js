@@ -40,7 +40,7 @@ export function registerWebixUIComponent(app) {
       this.webixId = webix.ui(config, this.$el);
       if (this.modelValue) data_handler.call(this, this.modelValue);
     },
-    destroyed() {
+    unmounted() {
       webix.$$(this.webixId).destructor();
     },
   });
@@ -113,7 +113,7 @@ function add_input(app, name) {
           context.$emit("update:modelValue", value);
       });
     },
-    destroyed() {
+    unmounted() {
       webix.$$(this.webixId).destructor();
     },
   });

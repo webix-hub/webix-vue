@@ -4,7 +4,7 @@
 
 See the [detailed documentation on integration of Webix with VueJS](http://docs.webix.com/desktop__vue.html).
 
-If you need a framework for using Webix UI, we highly recommend you use the [Webix Jet](https://webix.gitbooks.io/webix-jet/content/chapter1.html) framework for building web apps with Webix, as it is native for the library and will help you to manage the development stages in the most natural way.
+If you need a framework for using Webix UI, we highly recommend you use the [Webix Jet](https://webix.gitbook.io/webix-jet) framework for building web apps with Webix, as it is native for the library and will help you to manage the development stages in the most natural way.
 
 ## When to Use Vue+Webix integration
 
@@ -77,19 +77,19 @@ const app = Vue.createApp({
       return {
         data,
         ui: {
-          view: "datatable", 
-          autoheight: true, 
+          view: "datatable",
+          autoheight: true,
           select: "row",
           columns:[
-              { 
-                id: "value", 
-                header: "Section Index" 
+              {
+                id: "value",
+                header: "Section Index"
               },
               ...
           ]
         }
       };
-    } 
+    }
 });
 
 app.component(...); // init webix-ui component
@@ -140,7 +140,7 @@ const app = Vue.createApp({
         ],
       },
     };
-  } 
+  }
 });
 
 app.component(...); // init webix-ui component
@@ -157,8 +157,8 @@ The code sample below shows how a Webix List and a Vue template can be bound tog
 
 ```js
 const list = {
-  view: "list", 
-  id: "list", 
+  view: "list",
+  id: "list",
   select: true,
   template: "#value# (#size#)",
   data: [
@@ -168,7 +168,7 @@ const list = {
 };
 
 const preview = {
-    view: "vue", 
+    view: "vue",
     id: "preview",
     template: `
       <div>
@@ -244,14 +244,14 @@ app.component("my-slider", {
     });
   },
   // memory cleaning
-  destroyed() {
+  unmounted() {
     webix.$$(this.webixId).destructor();
   },
 });
 ```
 
-3. Use the registered component in the Vue component's template as a custom element. 
-   
+3. Use the registered component in the Vue component's template as a custom element.
+
 Overall, it would look something like this:
 
 ```js
@@ -306,7 +306,7 @@ const app = Vue.createApp({
             <webix-datepicker   label='Birthdate'   v-model.date='birthdate' />
             <webix-colorpicker  label='Color'       v-model.string='color' />
             <webix-slider       label='Level'       v-model.number='level' />
-        </fieldset>  
+        </fieldset>
     </div>
   `,
   data: {

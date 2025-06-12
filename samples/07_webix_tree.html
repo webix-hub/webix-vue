@@ -23,34 +23,46 @@
     <script>
       const app = Vue.createApp({
         template: `
-					<div>
-						<h3>Vue + Webix: DataTable</h3>
-						<p>Webix Tree</p>
-						<webix-ui :config='tree' v-model='treeData' copy-data='true'/>
+        <div>
+          <h3>Vue + Webix: DataTable</h3>
+          <p>Webix Tree</p>
 
-						<br><p>Webix TreeTable</p>
-						<webix-ui :config='treeTable' v-model='treeData' copy-data='true' />
+          <webix-ui :config='tree' v-model='treeData' copy-data='true'/>
+          <br>
+          <p>Webix TreeTable</p>
 
-						<br>
-						<p>Regular table</p>
+          <webix-ui :config='treeTable' v-model='treeData' copy-data='true' />
+          <br>
 
-						<table class='etable'>
-						<th>Value</th><th>Name</th><th>Last</th><th>Address</th>
-							<tr v-for="row in treeData">
-								<td>{{row.value}}</td>
-								<td>{{row.name}}
-								<table class="etable">
-									<tr v-for="sub in row.data">
-										<td>{{sub.name}}</td>
-									</tr>
-								</table>
-								</td>
-									<td>{{row.last}}</td>
-									<td>{{row.address}}</td>
-								</tr>
-							</table>
-					</div>
-				`,
+          <p>Regular table</p>
+          <table class='etable'>
+            <thead>
+              <tr>
+                <th>Value</th>
+                <th>Name</th>
+                <th>Last</th>
+                <th>Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="row in treeData">
+                <td>{{row.value}}</td>
+                <td>{{row.name}}
+                  <table class="etable">
+                    <tbody>
+                      <tr v-for="sub in row.data">
+                        <td>{{sub.name}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+                <td>{{row.last}}</td>
+                <td>{{row.address}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        `,
         data() {
           return {
             treeData: [
@@ -104,7 +116,7 @@
                   editor: "richselect",
                   sort: "string",
                   header: "Section",
-                  options: [ "First", "Second", "Third" ]
+                  options: ["First", "Second", "Third"],
                 },
                 {
                   id: "name",
@@ -121,7 +133,7 @@
                   header: "Last name",
                   width: 300,
                 },
-								{
+                {
                   id: "address",
                   editor: "text",
                   sort: "string",
@@ -139,9 +151,9 @@
         },
       });
 
-			registerWebixUIComponent(app);
+      registerWebixUIComponent(app);
 
-			app.mount("#demo1");
+      app.mount("#demo1");
     </script>
   </body>
 </html>

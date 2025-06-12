@@ -24,7 +24,7 @@
     "url": "https://github.com/webix-hub/webix-vue/issues"
   },
   "peerDependencies": {
-    "vue": "^3.3.4"
+    "vue": "^3.5.14"
   },
   "homepage": "https://github.com/webix-hub/webix-vue#readme"
 }

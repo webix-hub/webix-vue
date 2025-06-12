@@ -65,7 +65,7 @@ function add_input(app, name) {
           context.$emit("update:modelValue", value);
       });
     },
-    destroyed() {
+    unmounted() {
       webix.$$(this.webixId).destructor();
     },
   });
